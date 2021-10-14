@@ -6,8 +6,8 @@ class Processor:
     def check_letter(self):
         pass
 
-    def remove_list_element():
+    def remove_list_element(self):
         pass
 
-    def change_list_element():
+    def change_list_element(self):
         pass
