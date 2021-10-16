@@ -12,46 +12,90 @@ class Director:
     Attributes:
         keep_playing (boolean): Whether or not the game can continue.
         letter (str): The user's guess will be stored here.
-        word_line (str): The masked word will be stored here.
+        masked_word (str): The masked word will be stored here.
         console (Console): An instance of the class of objects known as Console.
         puzzle (Puzzle): An instance of the class of objects known as Puzzle.
         jumper (Jumper): An instance of the class of objects known as Jumper.
     """
 
     def __init__(self):
+        """Class constructor. Declares and initializes instance attributes.
+
+        Args:
+            self (Director): An instance of Director.
+        """
+
         self.keep_playing = True
         self.letter = ''
-        self.word_line = ''
+        self.masked_word = ''
         self.console = Console() 
         self.puzzle = Puzzle()
-        self.jumper = Jumper()
+        #Determine how many lives the user will get.
+        if len(self.puzzle.chosen_word) >= 3 and  len(self.puzzle.chosen_word) < 7:
+            num_lives = 7
+        elif len(self.puzzle.chosen_word) >= 7 and  len(self.puzzle.chosen_word) < 11:
+            num_lives = 9
+        else:
+            num_lives = 11
+        self.jumper = Jumper(num_lives) #pass in the number of lives the user gets
+
     
     def start_game(self):
-        self.get_inputs()
-        self.do_updates()
-        self.do_outputs()
+        """Starts the game loop to control the sequence of play.
+        
+        Args:
+            self (Director): an instance of Director.
+        """
 
-    def get_inputs(self):
         self.console.write_text(self.puzzle.get_word_progress())
         self.console.write_text(self.jumper.jumper_str())
+        while self.keep_playing:
+            self.get_inputs()
+            self.do_updates()
+            self.do_outputs()
+
+    def get_inputs(self):
+        """Gets the inputs at the beginning of each round of play. In this case,
+        that means getting the users next guess.
+
+        Args:
+            self (Director): An instance of Director.
+        """       
         self.letter = self.console.get_string('Guess a letter [a-z]: ')
         
-
     def do_updates(self):
-        if len(self.puzzle.chosen_word) >= 3 and  len(self.puzzle.chosen_word) < 7:
-            self.jumper.num_lives = 5
-        elif len(self.puzzle.chosen_word) >= 7 and  len(self.puzzle.chosen_word) < 11:
-            self.jumper.num_lives = 7
-        else:
-            self.jumper.num_lives = 9
+        """Updates the important game information for each round of play. In 
+        this case, that means the user's guess gets checked. 
+        If it is in the word, it gets added to the masked word.
+        If it is not, they lose a life.
+
+        Args:
+            self (Director): An instance of Director.
+        """        
         if self.puzzle.store_guess(self.letter):
-            self.word_line = self.puzzle.get_word_progress()
+            self.masked_word = self.puzzle.get_word_progress()
         else:
             self.jumper.lose_life() 
         
 
     def do_outputs(self):
-        self.console.write_text(self.word_line)
+        """Updates the important game information for each round of play. In 
+        this case, that means the masked word with any correct guesses is shown. 
+        The jumper is shown and the number of lives are tracked 
+
+        Args:
+            self (Director): An instance of Director.
+        """
+
+        self.console.write_text(self.masked_word)
         self.console.write_text(self.jumper.jumper_str())
-        self.keep_playing = (self.jumper.num_lives > 0)
+        if self.jumper.num_lives <= 0:
+            self.keep_playing = False
+            self.console.write_text(f'The word was: {self.puzzle.chosen_word}. Better luck next time!')
+        elif self.puzzle.check_word_completion(self.masked_word) == True:
+            self.keep_playing = False
+            self.console.write_text('You guessed it! Great Work!')
+        else:
+            self.keep_playing = True
+
 
