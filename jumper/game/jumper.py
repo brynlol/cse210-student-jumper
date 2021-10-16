@@ -67,6 +67,9 @@ class Jumper:
     
     def lose_life(self):
         """Change how the jumpman is displayed and decrement the number of lives by one.
+
+        Returns:
+            int: number of lives the jumpman has left.
         """
 
         def remove_top_layer(line):

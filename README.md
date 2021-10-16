@@ -34,4 +34,5 @@ root                    (project root folder)
 
 ## Authors
 ---
+* Chase Odermott - ode16003@byui.edu
 * Carson Bush - hyperdriveguy@byui.edu
