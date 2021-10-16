@@ -17,7 +17,7 @@ class Puzzle:
 
     """
 
-    def __init__(self, wordlist='../data/mit-wordlist.txt', min_chars=2):
+    def __init__(self, wordlist='jumper/data/mit-wordlist.txt', min_chars=2):
         """Initialize the puzzle with a given wordlist and minimum character filter.
 
         Args:
