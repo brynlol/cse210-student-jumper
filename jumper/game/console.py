@@ -37,13 +37,17 @@ class Console:
         """Displays the given text on the screen. 
 
         Args: 
-            self (Screen): An instance of Screen.
+            self (Console): An instance of Console.
             text (string): The text to display.
         """
         print(text)
 
     def write_list(self, list):
-        """Displays a list using for loop to print it down a line"""
+        """Displays a list using for loop to print it down a line.
+        Args:
+            self (Console): An instance of Console.
+            list (list): The list to display down a line
+        """
 
         for i in list:
             print(i)
