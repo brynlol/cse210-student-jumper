@@ -23,6 +23,11 @@ The project files and folders are organized as follows:
 root                    (project root folder)
 +-- hunter              (source code for game)
   +-- game              (specific game classes)
+    +-- __init__.py     (python package file)
+    +-- director.py     (controller for program)
+    +-- console.py      (service provider and interfacer for program)
+    +-- jumper.py       (information holder for program)
+    +-- puzzle.py       (information holder for program)
   +-- __init__.py       (python package file)
   +-- __main__.py       (entry point for program)
 +-- README.md           (general info)
@@ -36,3 +41,4 @@ root                    (project root folder)
 ---
 * Chase Odermott - ode16003@byui.edu
 * Carson Bush - hyperdriveguy@byui.edu
+* Bryndi Hellewell - brynlol12@gmail.com
