@@ -33,7 +33,7 @@ class Director:
 
     def get_inputs(self):
         self.console.write_text(self.puzzle.get_word_progress())
-        
+        self.console.write_text(self.jumper.jumper_str())
         self.letter = self.console.get_string('Guess a letter [a-z]: ')
         
 
@@ -52,5 +52,6 @@ class Director:
 
     def do_outputs(self):
         self.console.write_text(self.word_line)
+        self.console.write_text(self.jumper.jumper_str())
         self.keep_playing = (self.jumper.num_lives > 0)
 
