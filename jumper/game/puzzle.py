@@ -17,7 +17,7 @@ class Puzzle:
 
     """
 
-    def __init__(self, wordlist='../data/mit-wordlist.txt', min_chars=2):
+    def __init__(self, wordlist='jumper/data/mit-wordlist.txt', min_chars=2):
         """Initialize the puzzle with a given wordlist and minimum character filter.
 
         Args:
@@ -52,10 +52,8 @@ class Puzzle:
 
     def store_guess(self, guess):
         """Store user guess and determine whether it was correct.
-
         Args:
             guess (str): character being guessed.
-
         Returns:
             bool: True if guess is correct, false otherwise.
         """
@@ -68,7 +66,6 @@ class Puzzle:
 
     def get_word_progress(self):
         """Build string showing how many characters are in the word reflecting the player's progress.
-
         Returns:
             str: string with guessed letters and underlines for unknown letters.
         """
@@ -79,5 +76,23 @@ class Puzzle:
             else:
                 masked_string += '_'
             masked_string += ' '
-        return masked_string.strip()
+        return masked_string
+
+    def check_word_completion(self, masked_string):
+        """Checks to see if the user has guess the word.
         
+        Args:
+            masked_string (str): The masked string the user sees
+
+        Return (bool):
+            check if there are any letters that have not been found. Return False if this is the case.
+        
+        """
+        split_mask = masked_string.split(' ')
+        parsed_str = ''
+        for l in split_mask:
+            parsed_str += l
+        if parsed_str == self.chosen_word:
+            return True
+        return False
+    
