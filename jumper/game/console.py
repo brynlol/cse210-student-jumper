@@ -8,6 +8,18 @@ class Console:
     Attributes:
         prompt (string): The prompt to display on each line.
     """
+
+    def get_letter(self):
+        """Get a single character from the user.
+
+        Returns:
+            str: a single lowercase character.
+        """
+        valid_letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
+        letter = ''
+        while len(letter) != 1 and letter not in valid_letters:
+            letter = input('Guess a letter [a-z]: ').lower()
+        return letter
      
     def get_string(self, prompt):
         """Gets text input from the user through the screen.

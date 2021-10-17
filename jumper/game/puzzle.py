@@ -88,12 +88,11 @@ class Puzzle:
             check if there are any letters that have not been found. Return False if this is the case.
         
         """
-        word_complete = False
-        if '_' in masked_string:
-            word_complete = False
-        elif '' in masked_string:
-            word_complete = False
-        else:
-            word_complete = True
-        return word_complete
+        split_mask = masked_string.split(' ')
+        parsed_str = ''
+        for l in split_mask:
+            parsed_str += l
+        if parsed_str == self.chosen_word:
+            return True
+        return False
     

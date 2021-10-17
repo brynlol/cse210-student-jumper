@@ -61,7 +61,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """       
-        self.letter = self.console.get_string('Guess a letter [a-z]: ')
+        self.letter = self.console.get_letter()
         
     def do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -71,10 +71,10 @@ class Director:
 
         Args:
             self (Director): An instance of Director.
-        """        
-        if self.puzzle.store_guess(self.letter):
-            self.masked_word = self.puzzle.get_word_progress()
-        else:
+        """
+        guess_correct = self.puzzle.store_guess(self.letter)
+        self.masked_word = self.puzzle.get_word_progress()
+        if (not guess_correct) and (self.letter not in self.puzzle.guesses[:-1]):
             self.jumper.lose_life() 
         
 
